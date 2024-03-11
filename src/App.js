@@ -1,24 +1,32 @@
-import logo from './logo.svg';
+import React, { useContext } from 'react';
 import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Navbar from './Components/Navbar/Navbar';
+import Homepage from './Components/Homepage/Homepage';
+import Login from './Components/Login/Login';
+import Register from './Components/Login/Register';
+import About from './Components/About/About';
+import Contactus from './Components/Contactus/Contactus';
+import MyContext from './MyContext';
+import Profile from './Components/Profile/Profile';
+import Createservice from './Components/Createservice/Createservice';
 
 function App() {
+  const sharedvalue= useContext(MyContext);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Navbar/>
+      <Routes>
+        <Route path='/' element={<Homepage/>}/>
+        {sharedvalue.isAuthed===false && <Route path='/login' element={<Login/>}/>}
+        {sharedvalue.isAuthed===false && <Route path='/register' element={<Register/>}/>}
+        {sharedvalue.isAuthed===true && <Route path='/profile' element={<Profile/>}/>}
+        <Route path='/createservice' element={<Createservice/>}/>
+        <Route path='/about' element={<About/>}/>
+        <Route path='/contact' element={<Contactus/>}/>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
