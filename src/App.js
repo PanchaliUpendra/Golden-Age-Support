@@ -10,6 +10,7 @@ import Contactus from './Components/Contactus/Contactus';
 import MyContext from './MyContext';
 import Profile from './Components/Profile/Profile';
 import Createservice from './Components/Createservice/Createservice';
+import Services from './Components/Services/Services';
 
 function App() {
   const sharedvalue= useContext(MyContext);
@@ -22,6 +23,7 @@ function App() {
         {sharedvalue.isAuthed===false && <Route path='/login' element={<Login/>}/>}
         {sharedvalue.isAuthed===false && <Route path='/register' element={<Register/>}/>}
         {sharedvalue.isAuthed===true && <Route path='/profile' element={<Profile/>}/>}
+        <Route path='/services' element={<Services/>}/>
         <Route path='/createservice' element={<Createservice/>}/>
         <Route path='/about' element={<About/>}/>
         <Route path='/contact' element={<Contactus/>}/>

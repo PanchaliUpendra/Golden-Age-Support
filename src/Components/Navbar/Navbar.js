@@ -44,7 +44,7 @@ function Navbar(){
           >
             <NavLink to='/'><li>Home</li></NavLink>
             <NavLink to='/about'><li>About</li></NavLink>
-            <NavLink to='/academics'><li>Services</li></NavLink>
+            <NavLink to='/services'><li>Services</li></NavLink>
             <NavLink to='/facilities'><li>Search work</li></NavLink>
             {sharedvalue.isAuthed===true && <NavLink to='/createservice'><li>Create Service</li></NavLink>}
             <NavLink to='/activities'><li>Health</li></NavLink>
