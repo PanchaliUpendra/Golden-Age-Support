@@ -52,7 +52,10 @@ function Register(){
                             password:scregform.password,
                             address:scregform.address,
                             phone:scregform.phone,
-                            name:scregform.name
+                            name:scregform.name,
+                            imgurl:'',
+                            stars:0,
+                            reviews:0
                         });
                     }
                 navigate('/');

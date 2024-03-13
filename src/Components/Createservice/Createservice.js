@@ -55,7 +55,10 @@ function Createservice(){
                     completed:false,
                     feedback:'',
                     comment:'',
-                    createdby:sharedvalue.uid
+                    createdby:sharedvalue.uid,
+                    name:sharedvalue.profiledata.name,
+                    phone:sharedvalue.profiledata.phone,
+                    email:sharedvalue.profiledata.email
                 }}); // need to update backend with new fields
                 await batch.commit();
                 alert('successfully added...');

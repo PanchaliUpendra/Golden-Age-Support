@@ -1,16 +1,75 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import './Services.css';
 import Relphopic from '../../Assets/ralphwaldoemerson.jpg';
 import charledicken from '../../Assets/CharlesDickens.jpg';
 import barackobama from '../../Assets/BarackObama.jpg';
+import Footer from '../Footer/Footer';
+import MyContext from "../../MyContext";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 function Services(){
+    const sharedvalue = useContext(MyContext);
+    useEffect(()=>{
+        window.scrollTo({top:0,behavior:'instant'});
+    },[]);
     return(
         <>
             <div className="services-con">
                 <div className="services-divs">
                     <div className="services-divs-one">
-                        <h1>div1</h1>
+
+                        <div className="services-filter-location-con">
+                            <div className="services-filter-location">
+                                <label>Location</label>
+                                <select>
+                                    <option value=''>Choose Location</option>
+                                    <option value='New York'>New York</option>
+                                    <option value='Philadelphia'>Philadelphia</option>
+                                    <option value='Los Angeles'>Los Angeles</option>
+                                    <option value='California'>California</option>
+                                    <option value='San Diego'>San Diego</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        {/* allservices values wil come here... */}
+                        {
+
+                            sharedvalue.allserviceskeys.length>0?
+                            <div className="allservices-all-services">
+                            {sharedvalue.allserviceskeys.map((item,idx)=>(
+                                <div className="allservices-each-div" key={idx}>
+
+                                    <div className="service-card-first-header">
+                                        <div className="servies-card-top-header">
+                                            <AccountCircleIcon fontSize="large" sx={{color:'gray'}}/>
+                                            <div>
+                                                <h1>{sharedvalue.allservices[item].name}</h1>
+                                                <p><span>Location:</span> {sharedvalue.allservices[item].serlocation}</p>
+                                                <p><span>Address:</span> {sharedvalue.allservices[item].seraddress}</p>
+                                            </div>
+                                        </div>
+                                        <div className="allservices-accept-button">
+                                            <button>Accept</button>
+                                        </div>
+                                    </div>
+                                    <div className="required-services-first">
+                                        <h1>Required Service</h1>
+                                        <p>{sharedvalue.allservices[item].serinput}</p>
+                                    </div>
+
+                                    <div className="services-freetime-enddate">
+                                        <p><span>Free-Time: </span>{sharedvalue.allservices[item].freetimestart} - {sharedvalue.allservices[item].freetimeend}</p>
+                                        <p><span>enddate: </span>{sharedvalue.allservices[item].enddate}</p>
+                                    </div>
+                                </div>
+                            ))}
+                            </div>
+                            :
+                            <div>
+                                <h1>No services For Now</h1>
+                            </div>
+                        }
                     </div>
 
                     <div className="services-divs-two">
@@ -68,6 +127,8 @@ function Services(){
 
                 </div>
             </div>
+
+            <Footer/>
         </>
     );
 }
