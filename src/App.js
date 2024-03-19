@@ -13,6 +13,7 @@ import Createservice from './Components/Createservice/Createservice';
 import Services from './Components/Services/Services';
 import Careservices from './Components/Careservices/Careservices';
 import Findcareservices from './Components/Careservices/Findcareservices';
+import Ourservices from './Components/Ourservices/Ourservices';
 
 function App() {
   const sharedvalue= useContext(MyContext);
@@ -31,6 +32,7 @@ function App() {
         <Route path='/contact' element={<Contactus/>}/>
         {sharedvalue.isAuthed===true && <Route path='/careservices' element={<Careservices/>}/>}
         {sharedvalue.isAuthed===true && <Route path='/findcareservices' element={<Findcareservices/>}/>}
+        <Route path='/ourservices' element={<Ourservices/>}/>
       </Routes>
     </BrowserRouter>
   );
