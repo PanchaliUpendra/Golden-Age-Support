@@ -1,0 +1,245 @@
+/* .careservices-con{
+    min-height: 100vh;
+    background-color: #efefef;
+    padding-top: 30px;
+} */
+
+.careservices-addpost-active{
+    filter: blur(10px);
+    pointer-events:none;
+    user-select:none
+}
+
+.careservice-first-div{
+    min-height: 90vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../../Assets/caretaker.jpeg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.careservice-first-div>div{
+    margin-left: 30px;
+}
+
+
+.careservice-first-div>div h1{
+    font-size: 2.2rem;
+    font-weight: 600;
+    text-transform: capitalize;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    color: rgb(255, 187, 0);
+}
+.careservice-first-div>div p{
+    max-width: 800px;
+    color: white;
+}
+
+/* careservices-types */
+.careservices-types{
+    background-color:#efefef;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 30px;
+    padding-bottom: 15px;
+}
+
+.careservice-divs{
+    max-width: 350px;
+    min-height: 220px;
+    background-color: white;
+    margin-bottom: 30px;
+    margin-left: 20px;
+    margin-right: 20px;
+    box-shadow: 0px 0px 22px -1px rgba(235,235,235,1);
+    border-radius: 5px;
+    padding-top: 20px;
+    padding-left: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.careservice-divs>h1{
+    font-size: 1.09rem;
+    font-weight: 600;
+    text-transform: capitalize;
+    
+}
+.careservices-types>h1{
+    /* margin-left: 30px; */
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+
+}
+
+.careservice-first-div>div button{
+    width: fit-content;
+    padding: 8px 16px;
+    margin-top: 10px;
+    border-radius: 3px;
+    background-color: rgb(0, 156, 8);
+    color: white;
+    font-size: 0.9rem;
+    text-transform: capitalize;
+    font-weight: 500;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* careservices-created */
+.careservices-created{
+    background-color: #efefef;
+    padding-bottom: 30px;
+}
+.careservices-created-header>h1{
+    margin-left: 30px;
+    font-size: 1rem;
+    text-transform: capitalize;
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    /* margin-bottom: 20px; */
+}
+.careservices-created-noresults{
+    margin-left: 30px;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: gray;
+}
+
+.careservices-form{
+    border: 1px solid rgb(204, 204, 204);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    width:500px;
+    height: 89vh;
+    background-color: white;
+    margin: auto;
+    padding: 20px;
+    padding-bottom: 30px;
+    padding-top: 30px;
+    gap: 7px;
+    overflow-y: scroll;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+.careservices-form>h1{
+    text-align: center;
+    font-weight: 600;
+    text-transform: capitalize;
+    font-size: 1.25rem;
+    margin-bottom: 15px;
+}
+
+.careservices-form>div{
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.careservices-form>div label{
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.careservices-form>div input{
+    border: 1px solid gray;
+    height: 35px;
+    outline: none;
+    padding-left: 5px;
+    border-radius: 4px;
+}
+
+.careservices-form>div select{
+    border: 1px solid gray;
+    height: 35px;
+    outline: none;
+    padding-left: 5px;
+    border-radius: 4px;
+}
+
+.careservices-form>div button{
+    background-color: blue;
+    color: white;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+}
+
+.careservices-form>div textarea{
+    min-height: 70px;
+    resize: vertical;
+    outline: none;
+    border: 1px solid gray;
+}
+
+.care-services-form-active{
+    position: fixed;
+    top: 55%;
+    left: 50%;
+    z-index: 99;
+    transform: translate(-50%,-50%);
+    visibility: visible;
+    opacity: 1;
+    /* overflow: scroll; */
+    transition: all 0.5s ease;
+}
+
+.care-services-form-inactive{
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 99;
+    transform: translate(-50%,-50%);
+    transition: all 0.5s ease;
+}
+
+.careservices-form::-webkit-scrollbar{
+    width: 0.5em;
+}
+
+.careservices-form::-webkit-scrollbar-thumb {
+    background-color: transparent; /* Change the color as needed */
+    border-radius: 20px;
+    
+}
+
+.careservices-form:hover::-webkit-scrollbar-thumb {
+    background-color: #c7c7c733; /* Change the color as needed */
+    border-radius: 20px;
+    
+}
+
+/* careservices-form-cross */
+.careservices-form-cross{
+    position:absolute;
+    top: 35px;
+    right: 10px;
+    color: gray;
+    background-color: #efefef;
+    border-radius: 50%;
+    width: fit-content;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+@media screen and (max-width:530px){
+    .careservices-con{
+        width: 100%;
+    }
+    .careservices-form{
+        width: 95%;
+    }
+}

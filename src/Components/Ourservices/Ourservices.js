@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Ourservices.css';
 
 import img1 from './OurServicesBg.jpg';
@@ -15,6 +15,9 @@ import Footer from '../Footer/Footer';
 
 
 function Ourservices(){
+    useEffect(()=>{
+        window.scrollTo({top:0,behavior:'smooth'});
+    },[]);
     return(
         <>
             <div className="top-bg">

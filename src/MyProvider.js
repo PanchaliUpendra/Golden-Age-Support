@@ -63,7 +63,11 @@ function MyProvider({children}){
                     try{
                         await onSnapshot( doc(db,"users",uid),(doc)=>{
                             const tempquotesdata = doc.data();
-                            // console.log(tempquotesdata);
+                            console.log(tempquotesdata);
+                            setuser(prev=>({
+                                ...prev,
+                                role:tempquotesdata.role
+                            }));
                             setprofiledata(tempquotesdata);
 
                           })
