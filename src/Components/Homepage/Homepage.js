@@ -82,7 +82,7 @@ function Homepage(){
         <h1>Extending Thanks to Our Service Providers</h1>
         <p>We extend our sincerest gratitude to our service providers, whose unwavering dedication and compassionate care positively impact the lives of our seniors each day. Your commitment to excellence, professionalism, and empathy is a beacon of hope and support for those in need. We deeply appreciate the exceptional service you provide, and we are honored to work alongside such dedicated individuals who enrich the lives of our community with their heartfelt service.</p>
 
-        <button><a>Join As Servise Provider</a></button>
+        <button><>Join As Servise Provider</></button>
 
         </section>
         {/* footer */}
