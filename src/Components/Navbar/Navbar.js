@@ -49,10 +49,12 @@ function Navbar(){
             {sharedvalue.isAuthed===true && sharedvalue.role==='seniorcitizen' && <NavLink to='/createservice'><li>Create Service</li></NavLink>}
             {sharedvalue.isAuthed===true && sharedvalue.role==='caretaker' && <NavLink to='/careservices'><li>Create Care Services</li></NavLink>}
             {sharedvalue.isAuthed===true && sharedvalue.role==='seniorcitizen' && <NavLink to='/findcareservices'><li>Find Care Services</li></NavLink>}
-            <NavLink to='/Caretakers'><li>Care Takers</li></NavLink>
+            {sharedvalue.isAuthed===true && sharedvalue.role==='seniorcitizen' && <NavLink to='/showcreateservices'><li>Show Created Services</li></NavLink>}
+            {sharedvalue.isAuthed===true && sharedvalue.role==='serviceprovider' && <NavLink to ='/showacceptedservices'><li>Show Accepted Services</li></NavLink>}
+            {/* <NavLink to='/Caretakers'><li>Care Takers</li></NavLink>
             <NavLink to='/activities'><li>Health</li></NavLink>
             <NavLink to='/careers'><li>Interact</li></NavLink>
-            <NavLink to='/Admissions'><li>Find Service Provider</li></NavLink>
+            <NavLink to='/Admissions'><li>Find Service Provider</li></NavLink> */}
             {/* <NavLink to='/gallery'><li>gallery</li></NavLink> */}
             {sharedvalue.isAuthed===true && <NavLink to='/profile'><li>Profile</li></NavLink>}
             
