@@ -1,6 +1,56 @@
+.services-display-banner-con{
+    position: relative;
+    background-color: #efefef;
+    
+}
+
+.all-services-provide-display-banner-two{
+    position:relative ;
+    background-color:#EFEFEF;
+}
+
+.all-services-boxes-comes-here{
+    
+    position: absolute;
+    left: 50%;
+    top: -170px;
+    transform: translate(-50%,0%);
+    padding-left: 30px;
+    padding-right: 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    justify-content: center;
+    align-items: center;
+    /* position: absolute; */
+    /* bottom: -100px; */
+    /* left: 50%; */
+    /* transform: translate(-50%,-90%); */
+    gap: 30px;
+    
+}
+
+.all-services-boxes-comes-here>div{
+    min-width: 300px;
+    height: 250px;
+    background-color: white;
+    border-radius: 4px;
+}
+
+
+.all-services-provide-display-banner{
+    min-height: 450px;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../../Assets/community.jpg');
+    background-size: cover;
+    background-position: top;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .services-con{
     min-height: 100vh;
     background-color: #EFEFEF;
+    padding-top: 70px;
 }
 
 .services-divs{
@@ -211,6 +261,21 @@
 .services-freetime-enddate>p span{
     color: black;
     font-weight: 500;
+}
+
+@media all and (max-width:976px){
+    .services-con{
+        padding-top: 10px;
+    }
+    .all-services-boxes-comes-here{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        top: 20px;
+        
+    }
 }
 
 @media all and (max-width:865px){

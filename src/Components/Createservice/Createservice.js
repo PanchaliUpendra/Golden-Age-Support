@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import './Createservice.css';
 import { createService } from "../../Docs/Docs";
 import { db } from "../../firebase";
@@ -8,8 +8,10 @@ import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 import { v4 as uuidv4 } from 'uuid';
 import Footer from '../Footer/Footer';
+import { useNavigate } from "react-router-dom";
 
 function Createservice(){
+    const navigate = useNavigate();
     const sharedvalue = useContext(MyContext);
     const [open, setOpen] = useState(false);
     const batch = writeBatch(db);
@@ -87,6 +89,10 @@ function Createservice(){
         }
         setOpen(false);
     }
+
+    useEffect(()=>{
+        window.scrollTo({top:0,behavior:'smooth'});
+    },[]);
     return(
         <>
             <div className="createservice-con">
@@ -174,6 +180,7 @@ function Createservice(){
 
                     <button onClick={(e)=>handlecreateservices(e)}>Create Service</button>
                 </form>
+                <p className="createservices-see-services-btn">if you want to see the created services? <span onClick={()=>navigate('/showcreateservices')}>click here</span></p>
             </div>
             </div>
             <Footer/>
