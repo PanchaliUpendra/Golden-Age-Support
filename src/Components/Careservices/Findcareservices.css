@@ -1,0 +1,44 @@
+.find-care-services-banner{
+    min-height: 100vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../../Assets/groupcaretaker.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.find-care-services-banner>div{
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.find-care-services-banner>div h1{
+    font-size: 2.2rem;
+    font-weight: 600;
+    text-transform: capitalize;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    color: rgb(255, 187, 0);
+}
+
+.find-care-services-banner>div p{
+    color: white;
+    font-size: 1rem;
+    font-weight: 500;
+    font-style: italic;
+}
+
+.find-care-services-banner>div h2{
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: rgb(112, 255, 107);
+}
+
+/* findcareservices-con */
+.findcareservices-con{
+    min-height: 100vh;
+    background-color: #efefef;
+}

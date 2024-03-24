@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useEffect,useContext } from 'react';
 import './ShowAcceptedServices.css';
 import MyContext from '../../MyContext';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
@@ -8,6 +8,9 @@ import Footer from '../Footer/Footer';
 function ShowAcceptedServices(){
     // const navigate = useNavigate();
     const sharedvalue = useContext(MyContext);
+    useEffect(()=>{
+        window.scrollTo({top:0,behavior:'instant'});
+    },[]);
     return(
         <>
             <div className='show-accepted-services-banner'>

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import './Services.css';
 import Relphopic from '../../Assets/ralphwaldoemerson.jpg';
 import charledicken from '../../Assets/CharlesDickens.jpg';
@@ -6,9 +6,18 @@ import barackobama from '../../Assets/BarackObama.jpg';
 import Footer from '../Footer/Footer';
 import MyContext from "../../MyContext";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import MedicalInformationIcon from '@mui/icons-material/MedicalInformation';
+import AccessibleIcon from '@mui/icons-material/Accessible';
+import servicecard1 from '../../Assets/servicescard1.jpg';
+import { useNavigate } from "react-router-dom";
+
+import Marquee from "react-fast-marquee";
 
 function Services(){
     const sharedvalue = useContext(MyContext);
+    const navigate = useNavigate();
+
+    const [sortlocation,setsortlocation] = useState('');
     useEffect(()=>{
         window.scrollTo({top:0,behavior:'instant'});
     },[]);
@@ -20,13 +29,34 @@ function Services(){
                 </div>
                 <div className="all-services-provide-display-banner-two">
                     <div className="all-services-boxes-comes-here">
-                        <div className="all-service-box1">u
+                        <div className="all-service-box1">
+                            <div className="all-services-boxes-icon">
+                                <MedicalInformationIcon/>
+                            </div>
+                            <p>
+                                Our caregivers offer personalized assistance with ADLs at home, including bathing, grooming, meal prep, and 
+                                medication reminders, ensuring comfort and support throughout.
+                            </p>
+                            <h2 onClick={()=>navigate('/ourservices')}>Know More{`>`}</h2>
                         </div>
                         <div className="all-service-box1">
-                            p
+                            <div className="all-services-boxes-icon">
+                                <AccessibleIcon/>
+                            </div>
+                            <p>
+                                Our caregivers offer personalized assistance with ADLs at home, including bathing, grooming, meal prep, and medication 
+                                reminders, ensuring comfort and support throughout.
+                            </p>
+                            <h2 onClick={()=>navigate('/ourservices')}>Know More{`>`}</h2>
                         </div>
                         <div className="all-service-box1">
-                            e
+                            <img src={servicecard1} alt='golden-age-support'/>
+                            <p>
+                                Our caregivers offer personalized assistance with ADLs at home, including bathing, grooming, meal prep, 
+                                and medication reminders, ensuring comfort and support throughout.
+                            </p>
+
+                            <h2 onClick={()=>navigate('/ourservices')}>Know More{`>`}</h2>
                         </div>
                     </div>
                 </div>
@@ -38,7 +68,7 @@ function Services(){
                         <div className="services-filter-location-con">
                             <div className="services-filter-location">
                                 <label>Location</label>
-                                <select>
+                                <select value={sortlocation} onChange={(e)=>setsortlocation(e.target.value)}>
                                     <option value=''>Choose Location</option>
                                     <option value='New York'>New York</option>
                                     <option value='Philadelphia'>Philadelphia</option>
@@ -54,7 +84,9 @@ function Services(){
 
                             sharedvalue.allserviceskeys.length>0?
                             <div className="allservices-all-services">
-                            {sharedvalue.allserviceskeys.map((item,idx)=>(
+                            {sharedvalue.allserviceskeys
+                            .filter(item=>(sharedvalue.allservices[item].serlocation.includes(sortlocation)))
+                            .map((item,idx)=>(
                                 <div className="allservices-each-div" key={idx}>
 
                                     <div className="service-card-first-header">
@@ -142,6 +174,55 @@ function Services(){
 
                     
 
+                </div>
+            </div>
+
+            <div className="careservices-types">
+                <h1>Testimonial's</h1>
+                <div>
+                    <Marquee>
+                        <div className="careservice-divs">
+                            <h1>Personal Care</h1>
+                            <p>Caretakers assist with personal hygiene tasks such as bathing, dressing, grooming, and toileting. 
+                                They ensure that seniors maintain good hygiene practices and stay comfortable.</p>
+                        </div>
+                        <div className="careservice-divs">
+                            <h1>Medication Management</h1>
+                            <p>Caretakers help seniors with medication reminders, ensuring they take their prescribed medicines on time 
+                                and in the correct dosage as per the healthcare provider's instructions.</p>
+                        </div>
+                        <div className="careservice-divs">
+                            <h1>Mobility Support</h1>
+                            <p>For older adults with mobility issues, caretakers provide support with walking, 
+                                transferring from one place to another (e.g., from bed to chair), and using mobility aids like walkers or wheelchairs.</p>
+                        </div>
+                        <div className="careservice-divs">
+                            <h1>Meal Preparation</h1>
+                            <p>Caretakers prepare nutritious meals based on dietary requirements and preferences. 
+                                They may also assist with feeding if necessary, ensuring seniors receive adequate nutrition.</p>
+                        </div>
+                        <div className="careservice-divs">
+                            <h1>Household Assistance</h1>
+                            <p>Caretakers help with light household chores such as cleaning, laundry, and organizing. They create a safe and 
+                                tidy environment for seniors to live comfortably.</p>
+                        </div>
+                        <div className="careservice-divs">
+                            <h1>Companionship</h1>
+                            <p>Beyond physical assistance, caretakers offer companionship and emotional support. They engage in meaningful conversations, provide companionship during activities, and offer reassurance and encouragement.</p>
+                        </div>
+                        <div className="careservice-divs">
+                            <h1>Monitoring Health</h1>
+                            <p> Caretakers observe and report any changes in the senior's health or behavior to healthcare professionals or family members. They may also accompany seniors to medical appointments.</p>
+                        </div>
+                        <div className="careservice-divs">
+                            <h1>Safety and Emergency Response</h1>
+                            <p>Caretakers ensure the safety of seniors by identifying potential hazards in the home environment and implementing preventive measures. They are trained to respond calmly and effectively in case of emergencies.</p>
+                        </div>
+                        <div className="careservice-divs">
+                            <h1>Respect for Dignity and Independence</h1>
+                            <p>Caretakers respect the dignity and independence of older adults, promoting autonomy whenever possible while offering respectful assistance and support.</p>
+                        </div>
+                    </Marquee>
                 </div>
             </div>
 

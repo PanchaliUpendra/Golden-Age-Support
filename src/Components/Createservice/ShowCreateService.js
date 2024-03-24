@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, {useEffect, useContext } from 'react';
 import './ShowCreateService.css';
 import MyContext from '../../MyContext';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
@@ -8,6 +8,9 @@ import { useNavigate } from 'react-router-dom';
 function ShowCreateService(){
     const navigate = useNavigate();
     const sharedvalue = useContext(MyContext);
+    useEffect(()=>{
+        window.scrollTo({top:0,behavior:'instant'});
+    },[]);
     return(
         <>
             <div className='show-created-servies-banner'>

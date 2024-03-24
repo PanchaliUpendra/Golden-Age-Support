@@ -3,13 +3,16 @@ import MyContext from "./MyContext";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, onSnapshot } from "firebase/firestore";
 import { auth, db } from "./firebase";
-import { createService } from "./Docs/Docs";
+import { createService, careservices } from "./Docs/Docs";
 
 function MyProvider({children}){
     const[profiledata,setprofiledata]=useState('');
 
     const[allservices,setallservices] = useState({});
     const[allserviceskeys,setallserviceskeys] = useState([]);
+
+    const [allcareservices,setallcareservices] = useState({});
+    const [ allcareserkeys,setallcareserkeys] = useState([]);
 
     const [user,setuser] = useState({
         isAuthed:false,
@@ -24,7 +27,9 @@ function MyProvider({children}){
         userdtl:user.userdtl,
         profiledata:profiledata,
         allservices:allservices,
-        allserviceskeys:allserviceskeys
+        allserviceskeys:allserviceskeys,
+        allcareservices:allcareservices,
+        allcareserkeys:allcareserkeys
     }
     useEffect(()=>{
         const unSubscribe = onAuthStateChanged(auth, (userd) => {
@@ -38,6 +43,23 @@ function MyProvider({children}){
                   uid:uid,
                   userdtl:userd
                 }))
+
+                //fetching the care services
+                async function handlefetchcareservices(){
+                    try{
+                        await onSnapshot(careservices,(doc)=>{
+                            const tempcareservicesdata = doc.data();
+                            // console.log(tempservicesdata);
+                            setallcareservices(tempcareservicesdata);
+                            const tempcareservicekeys = Object.keys(tempcareservicesdata);
+                            // console.log(tempservicekeys);
+                            setallcareserkeys(tempcareservicekeys);
+                        })
+                    }catch(e){
+                        console.log('getting error while fetching the care services...',e);
+                    }
+                }
+                handlefetchcareservices();
 
                 //fetching the all services created by senior
 

@@ -121,7 +121,7 @@
     display: flex;
     flex-direction: column;
     width:500px;
-    height: 89vh;
+    height: 500px;
     background-color: white;
     margin: auto;
     padding: 20px;
@@ -235,11 +235,84 @@
     padding: 5px 10px;
 }
 
+/*createdcareservice-card*/
+
+.createdcareservice-card{
+    margin-left: 30px;
+    margin-right: 30px;
+    background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 10px;
+    /* background-color: antiquewhite; */
+}
+
+.createdcareservice-card-head{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 20px;
+
+}
+
+.createdcareservice-card-head>img{
+    height: 70px;
+    width: auto;
+    border-radius: 50%;
+}
+
+.created-care-service-likes-delete{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.created-care-service-likes-delete>p{
+    font-size: 0.9rem;
+    color: gray;
+    text-transform: capitalize;
+}
+
+.created-care-service-likes-delete>button{
+    padding: 7px 14px;
+    background-color: red;
+    color: white;
+    font-weight: 500;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 4px;
+}
+
+.createdcareservice-card-head>div h2{
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 7px;
+}
+
+.createdcareservice-card-head>div p{
+    font-size: 0.9rem;
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 20px;
+    background-color: rgb(209, 49, 161);
+}
+
 @media screen and (max-width:530px){
     .careservices-con{
         width: 100%;
     }
     .careservices-form{
         width: 95%;
+    }
+}
+
+@media screen and  (max-height:550px){
+    .careservices-form{
+        height: 90vh;
     }
 }
