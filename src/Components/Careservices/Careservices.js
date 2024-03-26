@@ -39,7 +39,8 @@ function Careservices(){
                 careservices.carelocat!==''
             ){
                 batch.update(ccs,{[uuidg]:{
-                    createdby:sharedvalue.uid,
+                    createduid:sharedvalue.uid,
+                    createdby:sharedvalue.profiledata,
                     careyourserv:careservices.careyourserv,
                     careservtype:careservices.careservtype,
                     careservdes:careservices.careservdes,
@@ -141,10 +142,10 @@ function Careservices(){
 
                 {
                     sharedvalue.allcareserkeys
-                    .filter(item=>(sharedvalue.allcareservices[item].createdby===sharedvalue.uid))
+                    .filter(item=>(sharedvalue.allcareservices[item].createduid===sharedvalue.uid))
                     .length>0?
                         (sharedvalue.allcareserkeys
-                        .filter(item=>(sharedvalue.allcareservices[item].createdby===sharedvalue.uid)).map((item,idx)=>(
+                        .filter(item=>(sharedvalue.allcareservices[item].createduid===sharedvalue.uid)).map((item,idx)=>(
                             <div className="createdcareservice-card">
                         <div className="createdcareservice-card-head">
                             <img src={caretakerlogo} alt='logo'/>

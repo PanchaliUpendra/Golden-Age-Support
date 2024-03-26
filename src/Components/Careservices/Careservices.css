@@ -300,6 +300,7 @@
     padding-bottom: 5px;
     border-radius: 20px;
     background-color: rgb(209, 49, 161);
+    width: fit-content;
 }
 
 @media screen and (max-width:530px){
