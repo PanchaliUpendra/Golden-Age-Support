@@ -107,7 +107,7 @@ function Services(){
                         {/* allservices values wil come here... */}
                         {
 
-                            sharedvalue.allserviceskeys.length>0?
+                            sharedvalue.allserviceskeys.filter(item=>(sharedvalue.allservices[item].accepted!==true)).length>0?
                             <div className="allservices-all-services">
                             {sharedvalue.allserviceskeys
                             .filter(item=>(sharedvalue.allservices[item].serlocation.includes(sortlocation)))
