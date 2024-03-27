@@ -12,12 +12,37 @@ import servicecard1 from '../../Assets/servicescard1.jpg';
 import { useNavigate } from "react-router-dom";
 
 import Marquee from "react-fast-marquee";
+import { db } from "../../firebase";
+import { writeBatch } from "firebase/firestore"; 
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+import { updateDoc} from "firebase/firestore";
+import { createService } from "../../Docs/Docs";
 
 function Services(){
     const sharedvalue = useContext(MyContext);
     const navigate = useNavigate();
-
+    const batch = writeBatch(db);
     const [sortlocation,setsortlocation] = useState('');
+    const [showloading,setshowloading] = useState(false);
+
+
+    async function handleacceptservice(serviceid){
+        setshowloading(true);
+        try{
+            await updateDoc(createService,{
+                [serviceid]:{
+                    ...sharedvalue.allservices[serviceid],
+                    accepted:true,
+                    acceptedby:sharedvalue.profiledata
+                }
+            });
+            await batch.commit();
+        }catch(e){
+            console.log('you got an error while deleting the quotation',e);
+        }
+         setshowloading(false);
+    }
     useEffect(()=>{
         window.scrollTo({top:0,behavior:'instant'});
     },[]);
@@ -86,6 +111,7 @@ function Services(){
                             <div className="allservices-all-services">
                             {sharedvalue.allserviceskeys
                             .filter(item=>(sharedvalue.allservices[item].serlocation.includes(sortlocation)))
+                            .filter(item=>(sharedvalue.allservices[item].accepted!==true))
                             .map((item,idx)=>(
                                 <div className="allservices-each-div" key={idx}>
 
@@ -99,7 +125,7 @@ function Services(){
                                             </div>
                                         </div>
                                         <div className="allservices-accept-button">
-                                            <button>Accept</button>
+                                            <button onClick={()=>handleacceptservice(item)}>Accept</button>
                                         </div>
                                     </div>
                                     <div className="required-services-first">
@@ -225,6 +251,12 @@ function Services(){
                     </Marquee>
                 </div>
             </div>
+            <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={showloading}
+            >
+                <CircularProgress color="inherit" />
+            </Backdrop>
 
             <Footer/>
         </>

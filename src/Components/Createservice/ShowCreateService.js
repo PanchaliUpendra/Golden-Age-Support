@@ -1,13 +1,62 @@
-import React, {useEffect, useContext } from 'react';
+import React, {useEffect, useContext ,useState} from 'react';
 import './ShowCreateService.css';
 import MyContext from '../../MyContext';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Footer from '../Footer/Footer';
 import { useNavigate } from 'react-router-dom';
+import { db } from '../../firebase';
+import {writeBatch} from "firebase/firestore";
+import { updateDoc, deleteField } from "firebase/firestore";
+import { createService } from '../../Docs/Docs';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+// import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 function ShowCreateService(){
     const navigate = useNavigate();
+    const batch = writeBatch(db);//get a new write batch
+    const [showloading,setshowloading] = useState(false);
     const sharedvalue = useContext(MyContext);
+    const [deleteserv,setdeleteserv] = useState({
+        serviceid:'',
+        active:false,
+    })
+    async function handledeleteservice(){
+        setshowloading(true);
+        try{
+            await updateDoc(createService,{
+                [deleteserv.serviceid]:deleteField()
+            });
+            await batch.commit();
+            setdeleteserv(prev=>({
+                ...prev,
+                serviceid:'',
+                active:false,
+            }))
+        }catch(e){
+            console.log('you got an error while deleting the quotation',e);
+        }
+         setshowloading(false);
+    }
+
+    async function handlecancleservice(serviceid){
+        setshowloading(true);
+        try{
+            await updateDoc(createService,{
+                [serviceid]:{
+                    ...sharedvalue.allservices[serviceid],
+                    accepted:false,
+                    acceptedby:''
+                }
+            });
+            await batch.commit();
+        }catch(e){
+            console.log('you got an error while deleting the quotation',e);
+        }
+         setshowloading(false);
+    }
+
+
     useEffect(()=>{
         window.scrollTo({top:0,behavior:'instant'});
     },[]);
@@ -22,7 +71,7 @@ function ShowCreateService(){
                     <h3>if you want to take more services? <span onClick={()=>navigate('/createservice')}>Take Service</span></h3>
                 </div>
             </div>
-            <div className="show-services-con">
+            <div className={deleteserv.active===true?`show-services-con-inactive`:`show-services-con`}>
                 <div className="services-divs">
                     <div className="show-services-divs-one">
                         {/* allservices values wil come here... */}
@@ -45,7 +94,11 @@ function ShowCreateService(){
                                             </div>
                                         </div>
                                         <div className="allservices-cancel-button ">
-                                            <button>cancel</button>
+                                            <button onClick={()=>setdeleteserv(prev=>({
+                                                ...prev,
+                                                serviceid:item,
+                                                active:true
+                                            }))}>delete</button>
                                         </div>
                                     </div>
                                     <div className="required-services-first">
@@ -56,6 +109,31 @@ function ShowCreateService(){
                                     <div className="services-freetime-enddate">
                                         <p><span>Free-Time: </span>{sharedvalue.allservices[item].freetimestart} - {sharedvalue.allservices[item].freetimeend}</p>
                                         <p><span>enddate: </span>{sharedvalue.allservices[item].enddate}</p>
+                                    </div>
+
+                                    {
+                                        sharedvalue.allservices[item].accepted===true &&
+                                        <div className='sc-ser-acceptedby-profile'>
+                                            <h1>Service Accepted By..</h1>
+                                            <div className='sc-ser-aptd-pro-div1'>
+                                                <AccountCircleIcon fontSize='large' sx={{color:'gray'}}/>
+                                                <div>
+                                                    <h1>{sharedvalue.allservices[item].acceptedby.name}</h1>
+                                                    <p>{sharedvalue.allservices[item].acceptedby.address}</p>
+                                                </div>
+                                            </div>
+                                            <div className='sc-ser-aptd-pro-div2'>
+                                                <div>
+                                                    <p>email: <span>{sharedvalue.allservices[item].acceptedby.email}</span></p>
+                                                    <p>mobile: <span>{sharedvalue.allservices[item].acceptedby.phone}</span></p>
+                                                    {sharedvalue.allservices[item].acceptedby.showotp===true && <p>otp: <span>{sharedvalue.allservices[item].acceptedby.otp}</span></p>}
+                                                </div>
+                                                <button onClick={()=>handlecancleservice(item)}>Cancle</button>
+                                            </div>
+                                        </div>
+                                    }
+                                    <div className='services-acceptedby-show-to-sc'>
+
                                     </div>
                                 </div>
                             ))}
@@ -74,8 +152,28 @@ function ShowCreateService(){
                     </div>
                 </div>
             </div>
+
+            <div className={deleteserv.active===true?'delete-create-serve-active':'delete-create-serve-inactive'}>
+                <h1>Are You Sure , you want to delete this service</h1>
+                <div>
+                    <button className='deleteserv-yes-btn' onClick={()=>handledeleteservice()}>yes</button>
+                    <button className='deleteserv-yes-no' onClick={()=>setdeleteserv(prev=>({
+                        ...prev,
+                        serviceid:'',
+                        active:false
+                    }))}>No</button>
+                </div>
+            </div>
+            {/* here ia the back drop */}
+            <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={showloading}
+            >
+                <CircularProgress color="inherit" />
+            </Backdrop>
             
             <Footer/>
+
         </>
     );
 }

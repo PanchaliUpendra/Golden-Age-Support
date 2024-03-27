@@ -28,6 +28,10 @@ function Createservice(){
         completed:false,
         feedback:'',
         comment:'',
+        showotp:false,
+        otp:'',
+        stars:'',
+        
     });
 
     //adding the data towards the database
@@ -59,9 +63,13 @@ function Createservice(){
                     feedback:'',
                     comment:'',
                     createdby:sharedvalue.uid,
+                    createdpro:sharedvalue.profiledata,
                     name:sharedvalue.profiledata.name,
                     phone:sharedvalue.profiledata.phone,
-                    email:sharedvalue.profiledata.email
+                    email:sharedvalue.profiledata.email,
+                    showotp:false,
+                    otp:Math.floor(Math.random() * 900) + 100,
+                    stars:'',
                 }}); // need to update backend with new fields
                 await batch.commit();
                 alert('successfully added...');
@@ -79,6 +87,9 @@ function Createservice(){
                     completed:false,
                     feedback:'',
                     comment:'',
+                    showotp:false,
+                    otp:'',
+                    stars:'',
                 }))
             }else{
                 alert('please fill all the fields...');
