@@ -1,3 +1,8 @@
+.showacceptedservice-inactive{
+    filter: blur(10px);
+    pointer-events:none;
+    user-select:none
+}
 .show-accepted-services-banner{
     min-height: 450px;
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../../Assets/acceptedservices.jpg');
@@ -21,4 +26,53 @@
     color: rgb(255, 187, 0);
     font-size: 2rem;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+/*showaccepted-services-header  */
+.showaccepted-services-header{
+    padding-left: 30px;
+    padding-top: 20px;
+    background-color: #efefef;
+}
+.showaccepted-services-header>h1{
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+/* showacceptedbtn-completed */
+.showacceptedbtn-completed>button{
+    background-color: green;
+    padding: 5px 15px;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+/* pop up card css */
+.show-accepted-compopup-active{
+    width: 350px;
+    min-height: fit-content;
+    padding: 20px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    opacity:1;
+    visibility: visible;
+    transition: all 0.4s ease;
+}
+
+.show-accepted-compopup-inactive{
+    width: 350px;
+    min-height: fit-content;
+    padding: 20px;
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    opacity:0;
+    visibility: hidden;
+    transition: all 0.4s ease;
 }
