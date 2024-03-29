@@ -18,7 +18,9 @@ function ShowAcceptedServices(){
     const [showloading,setshowloading] = useState(false);
     const [blurwholecon,setblurwholecon] = useState(false);
     const [compopupdata,setcompopupdata] = useState({
-        active:false
+        active:false,
+        servid:'',
+        otp:''
     })
 
     async function handlecancleservice(serviceid){
@@ -37,7 +39,53 @@ function ShowAcceptedServices(){
         }
          setshowloading(false);
     }
-
+    //function handle show password
+    async function handleshowpassword(item){
+        setshowloading(true);
+        try{
+            if(sharedvalue.allservices[item].showotp===false){
+                await updateDoc(createService,{
+                    [item]:{
+                        ...sharedvalue.allservices[item],
+                        showotp:true
+                    }
+                });
+                await batch.commit();
+            }
+        }catch(e){
+            console.log('you got an error send the otp...',e);
+            alert('you got an error while sending otp');
+        }
+        setshowloading(false);
+    }
+    //function handling the submit button
+    async function handlecompletedsubmitbtn(item){
+        setshowloading(true);
+        try{
+            if(Number(sharedvalue.allservices[item].otp)===Number(compopupdata.otp)){
+                await updateDoc(createService,{
+                    [item]:{
+                        ...sharedvalue.allservices[item],
+                        completed:true
+                    }
+                });
+                await batch.commit();
+                setcompopupdata(prev=>({
+                    ...prev,
+                    active:false,
+                    servid:'',
+                    otp:''
+                }));
+                setblurwholecon(false);
+            }else{
+                alert('incorrect otp...');
+            }
+        }catch(e){
+            console.log('you got an error send the otp...',e);
+            alert('you got an error while sending otp');
+        }
+        setshowloading(false);
+    }
     useEffect(()=>{
         window.scrollTo({top:0,behavior:'instant'});
     },[]);
@@ -61,10 +109,13 @@ function ShowAcceptedServices(){
                             {/* allservices values wil come here... */}
                             {
 
-                                sharedvalue.allserviceskeys.filter(item=>(sharedvalue.allservices[item].accepted===true && sharedvalue.allservices[item].acceptedby.email===sharedvalue.profiledata.email)).length>0?
+                                sharedvalue.allserviceskeys.filter(item=>(sharedvalue.allservices[item].accepted===true && sharedvalue.allservices[item].acceptedby.email===sharedvalue.profiledata.email))
+                                .filter(item=>sharedvalue.allservices[item].completed===false)
+                                .length>0?
                                 <div className="allservices-all-services">
                                 {sharedvalue.allserviceskeys
                                 .filter(item=>(sharedvalue.allservices[item].accepted===true && sharedvalue.allservices[item].acceptedby.email===sharedvalue.profiledata.email))
+                                .filter(item=>sharedvalue.allservices[item].completed===false)
                                 .map((item,idx)=>(
                                     <div className="allservices-each-div" key={idx}>
 
@@ -82,8 +133,10 @@ function ShowAcceptedServices(){
                                                     setblurwholecon(true);
                                                     setcompopupdata(prev=>({
                                                         ...prev,
-                                                        active:true
-                                                    }))
+                                                        active:true,
+                                                        servid:item
+                                                    }));
+                                                    handleshowpassword(item);
                                                 }}>Completed</button>
                                             </div>
                                         </div>
@@ -138,22 +191,88 @@ function ShowAcceptedServices(){
                     </div>
                     <div className='show-services-after'>
                         <h1>Services Provided ....</h1>
-                        <div>
-                            <p>Still you didn't provide any Services!!!</p>
-                        </div>
+                        {
+                            sharedvalue.allserviceskeys.filter(item=>(sharedvalue.allservices[item].accepted===true && sharedvalue.allservices[item].acceptedby.email===sharedvalue.profiledata.email))
+                            .filter(item=>sharedvalue.allservices[item].completed===true)
+                            .length>0?
+                            <div className="allservices-all-services">
+                            {sharedvalue.allserviceskeys
+                            .filter(item=>(sharedvalue.allservices[item].accepted===true && sharedvalue.allservices[item].acceptedby.email===sharedvalue.profiledata.email))
+                            .filter(item=>sharedvalue.allservices[item].completed===true)
+                            .map((item,idx)=>(
+                                <div className="show-all-accepted-servces-each-div" key={idx}>
+
+                                    <div className="service-card-first-header">
+                                        <div className="servies-card-top-header">
+                                            <AccountCircleIcon fontSize="large" sx={{color:'gray'}}/>
+                                            <div>
+                                                <h1>{sharedvalue.allservices[item].name}</h1>
+                                                <p><span>Location:</span> {sharedvalue.allservices[item].serlocation}</p>
+                                                <p><span>Address:</span> {sharedvalue.allservices[item].seraddress}</p>
+                                            </div>
+                                        </div>
+                                        <div className='successfully-completed-btn'>
+                                            <button>successfully Completed</button>
+                                        </div>
+                                    </div>
+                                    <div className="required-services-first">
+                                        <h1>Required Service</h1>
+                                        <p>{sharedvalue.allservices[item].serinput}</p>
+                                    </div>
+
+                                    <div className="services-freetime-enddate">
+                                        <p><span>email: </span>{sharedvalue.allservices[item].createdpro.email}</p>
+                                        <p><span>phone: </span>{sharedvalue.allservices[item].createdpro.phone}</p>
+                                    </div>
+
+                                    <div className="services-freetime-enddate">
+                                        <p><span>Free-Time: </span>{sharedvalue.allservices[item].freetimestart} - {sharedvalue.allservices[item].freetimeend}</p>
+                                        <p><span>enddate: </span>{sharedvalue.allservices[item].enddate}</p>
+                                    </div>
+
+                                    {sharedvalue.allservices[item].stars!=='' &&
+                                    <div>
+                                     <p className='showcreated-service-stars-show'>stars:<span>{sharedvalue.allservices[item].stars}</span><span className='showcreated-service-stars-show-span'>★</span></p>
+                                     <div className="services-freetime-enddate">
+                                      <p><span>feedback: </span>{sharedvalue.allservices[item].feedback}</p>
+                                     </div>
+                                     </div>
+                                     }
+                                    <div className='services-acceptedby-show-to-sc'>
+
+                                    </div>
+                                </div>
+                            ))}
+                            </div>:
+                            <div>
+                                <p>Still you didn't provide any Services!!!</p>
+                            </div>
+                        }
+                        
                     </div>
                 </div>
             </div>
             {/* complete popup card */}
             <div className={compopupdata.active===true?'show-accepted-compopup-active':'show-accepted-compopup-inactive'}>
-                <h1>Enter your data</h1>
-                <button onClick={()=>{
-                    setcompopupdata(prev=>({
+                <div className='show-accpt-popup-close'>
+                    <h3  onClick={()=>{
+                        setcompopupdata(prev=>({
+                        ...prev,
+                        active:false
+                        }));
+                        setblurwholecon(false);
+                    }}>X</h3>
+                </div>
+                
+                <h1>Complete the service</h1>
+                <p>please enter the otp</p>
+                <input type='text' value={compopupdata.otp} onChange={(e)=>setcompopupdata(prev=>({
                     ...prev,
-                    active:false
-                    }));
-                    setblurwholecon(false);
-                }}>close</button>
+                    otp:e.target.value
+                }))}/>
+                <button onClick={()=>handlecompletedsubmitbtn(compopupdata.servid)}>Submit</button>
+                
+                
             </div>
 
              {/* here ia the back drop */}
