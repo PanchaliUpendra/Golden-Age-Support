@@ -1,19 +1,47 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext,  useState } from "react";
 import './Findcareservices.css';
 import { Typewriter } from 'react-simple-typewriter'
 import MyContext from "../../MyContext";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Footer from "../Footer/Footer";
-
+import { careservices } from "../../Docs/Docs";
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+import { writeBatch } from "firebase/firestore";
+import { db } from "../../firebase";
 
 function Findcareservices(){
     const sharedvalue = useContext(MyContext);
     //filter 
     const[chooselocation,setchooselocation] = useState('');
     const[chooseservicetype,setchooseservicetype] = useState('');
-    useEffect(()=>{
-        window.scrollTo({top:0,behavior:'instant'});
-    })
+    const [open, setOpen] = useState(false);
+    const batch = writeBatch(db);
+    //adding the interest 
+    async function interestedaddingfunction(itemid){
+        setOpen(true);
+        try{
+            if(sharedvalue.allcareservices[itemid].interestedby.filter(item=>item.email===sharedvalue.profiledata.email).length===0){
+                batch.update(careservices,{[itemid]:{
+                    ...sharedvalue.allcareservices[itemid],
+                    interestedby:[...sharedvalue.allcareservices[itemid].interestedby,sharedvalue.profiledata]
+                }});
+            }else{
+                batch.update(careservices,{[itemid]:{
+                    ...sharedvalue.allcareservices[itemid],
+                    interestedby:sharedvalue.allcareservices[itemid].interestedby.filter(item=>(item.email!==sharedvalue.profiledata.email))
+                }});
+            }
+            
+            await batch.commit();
+        }catch(e){
+            console.log('you got an error while adding ...',e);
+        }
+        setOpen(false);
+    }
+    // useEffect(()=>{
+    //     window.scrollTo({top:0,behavior:'instant'});
+    // })
     return(
         <>
             <div className="find-care-services-banner">
@@ -70,7 +98,7 @@ function Findcareservices(){
                                     </div>
                                     <div className="findcareservice-each-display-second-second">
                                         <p>likes | {sharedvalue.allcareservices[item].interestedby.length}</p>
-                                        <button>interest</button>
+                                        {sharedvalue.allcareservices[item].interestedby.filter(item=>item.email===sharedvalue.profiledata.email).length!==0?<h2 onClick={()=>interestedaddingfunction(item)}>not interested</h2>:<button onClick={()=>interestedaddingfunction(item)}>interest</button>}
                                     </div>
                                 </div>
                             </div>
@@ -113,6 +141,13 @@ function Findcareservices(){
                 </div>
             </div>
             <Footer/>
+            <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={open}
+            >
+                <CircularProgress color="inherit" />
+            </Backdrop>
+            
         </>
     );
 }

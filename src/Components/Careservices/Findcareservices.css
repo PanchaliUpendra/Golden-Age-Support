@@ -184,6 +184,17 @@
     font-weight: 500;
 }
 
+/* findcareservice-each-display-second-second */
+.findcareservice-each-display-second-second>h2{
+    background-color: rgb(226, 226, 226);
+    color: black;
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: 7px 14px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
 @media all and (max-width:800px){
     .findcareservices-con{
         display: flex;
