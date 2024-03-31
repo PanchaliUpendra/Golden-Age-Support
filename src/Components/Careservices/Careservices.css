@@ -222,6 +222,21 @@
     
 }
 
+/* displayinterested-active */
+.displayinterested-active::-webkit-scrollbar{
+    width: 0.5em;
+}
+.displayinterested-active::-webkit-scrollbar-thumb {
+    background-color: transparent; /* Change the color as needed */
+    border-radius: 20px;
+    
+}
+.displayinterested-active:hover::-webkit-scrollbar-thumb {
+    background-color: #c7c7c733; /* Change the color as needed */
+    border-radius: 20px;
+    
+}
+
 /* careservices-form-cross */
 .careservices-form-cross{
     position:absolute;
@@ -268,11 +283,28 @@
     align-items: center;
     justify-content: space-between;
 }
+.created-care-service-likes-delete>div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
 
-.created-care-service-likes-delete>p{
+.created-care-service-likes-delete>div p{
     font-size: 0.9rem;
     color: gray;
     text-transform: capitalize;
+}
+
+.created-care-service-likes-delete>div button{
+    border: none;
+    cursor: pointer;
+    color: blue;
+    text-decoration: underline;
+    padding: 5px 5px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    border-radius: 5px;
 }
 
 .created-care-service-likes-delete>button{
@@ -301,6 +333,92 @@
     border-radius: 20px;
     background-color: rgb(209, 49, 161);
     width: fit-content;
+}
+
+.displayinterested-active, .displayinterested-inactive{
+    width: 600px;
+    background-color: white;
+    border: 1px solid gray;
+    border-radius: 5px;
+    height: 550px;
+    position: fixed;
+    left: 50%;
+    transition: all 0.4s ease;
+}
+.displayinterested-active{
+    top: 60px;
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%,0%);
+}
+.displayinterested-inactive{
+    top: 50px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(-50%,0%);
+}
+.careservices-displaysc-header{
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+.careservices-displaysc-header>h1{
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* display-services-each-top-head */
+.display-services-each-top-head{
+    display: flex;
+    flex-direction: row;
+    gap:10px;
+    align-items: center;
+}
+
+.display-services-each-top-head>div h1{
+    font-size: 1rem;
+    text-transform: capitalize;
+    font-weight: 600;
+}
+
+.display-service-sc-email-phone{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.display-service-sc-email-phone>div{
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+.all-display-services-sc-interested{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+}
+.all-display-services-sc-interested>div{
+    width: 100%;
+    padding: 10px;
+    background-color: rgba(245, 245, 245, 0.801);
+    border-radius: 5px;
+}
+
+.display-service-sc-email-phone>div p, .display-service-sc-email-phone>p{
+    font-size: 0.9rem;
+    color: black;
+    font-weight: 500;
+}
+
+.display-service-sc-email-phone>div p span, .display-service-sc-email-phone>p span{
+    color: gray;
+}
+@media all and (max-height:612px){
+    .displayinterested-active, .displayinterested-inactive{
+        height: 85%;
+        margin-bottom: 5px;
+        overflow-y: scroll;
+    }
 }
 
 @media screen and (max-width:530px){

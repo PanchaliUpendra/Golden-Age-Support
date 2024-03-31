@@ -97,7 +97,7 @@ function Findcareservices(){
                                         </h3>
                                     </div>
                                     <div className="findcareservice-each-display-second-second">
-                                        <p>likes | {sharedvalue.allcareservices[item].interestedby.length}</p>
+                                            <p>likes | {sharedvalue.allcareservices[item].interestedby.length}</p>
                                         {sharedvalue.allcareservices[item].interestedby.filter(item=>item.email===sharedvalue.profiledata.email).length!==0?<h2 onClick={()=>interestedaddingfunction(item)}>not interested</h2>:<button onClick={()=>interestedaddingfunction(item)}>interest</button>}
                                     </div>
                                 </div>

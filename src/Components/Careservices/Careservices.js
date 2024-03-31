@@ -12,6 +12,8 @@ import { v4 as uuidv4 } from 'uuid';
 import MyContext from "../../MyContext";
 
 import caretakerlogo from '../../Assets/caretakerlogo.jpg';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+
 
 function Careservices(){
     const sharedvalue = useContext(MyContext);
@@ -27,6 +29,10 @@ function Careservices(){
         careslyexp:0,
         carelocat:'',
         status:'disable'
+    });
+    const [displayinterested,setdisplayinterested] = useState({
+        active:false,
+        serviceid:''
     });
 
     async function handlecreatecareservices(e){
@@ -75,7 +81,7 @@ function Careservices(){
     }
     return(
         <>
-            <div className={`${addpost===true?'careservices-addpost-active':''}`}>
+            <div className={`${(addpost===true||displayinterested.active===true)?'careservices-addpost-active':''}`}>
             <div className="careservice-first-div">
                 <div>
                     <h1>Create Care Service</h1>
@@ -157,7 +163,15 @@ function Careservices(){
                         <div className="createdcareservice-card-body">
                             <p>{sharedvalue.allcareservices[item].careservdes}</p>
                             <div className="created-care-service-likes-delete">
-                                <p>likes | {sharedvalue.allcareservices[item].interestedby.length}</p>
+                                <div>
+                                    <p>likes | {sharedvalue.allcareservices[item].interestedby.length}</p>
+                                    {sharedvalue.allcareservices[item].interestedby.length>0 && 
+                                    <button onClick={()=>setdisplayinterested(prev=>({
+                                        ...prev,
+                                        active:true,
+                                        serviceid:item
+                                    }))}>show interested candidates</button>}
+                                </div>
                                 <button>delete</button>
                             </div>
                         </div>
@@ -237,6 +251,42 @@ function Careservices(){
                     </div>
                     <div>
                         <button onClick={(e)=>handlecreatecareservices(e)}>Create Service</button>
+                    </div>
+                </div>
+            </div>
+
+            {/* display all services caard comes here... */}
+            <div className={displayinterested.active?`displayinterested-active`:`displayinterested-inactive`}>
+                <div>
+                <p className="careservices-form-cross" onClick={()=>setdisplayinterested(prev=>({
+                    ...prev,
+                    active:false,
+                    serviceid:'',
+                }))}>X</p>
+                    <div className="careservices-displaysc-header">
+                        <h1>all interested senior citizen's</h1>
+                    </div>
+                    <div className="all-display-services-sc-interested">
+                        {displayinterested.serviceid!=='' &&
+                            sharedvalue.allcareservices[displayinterested.serviceid].interestedby.map((item,idx)=>(
+                                <div>
+                                    <div className="display-services-each-top-head">
+                                        <AccountCircleIcon fontSize="medium" sx={{color:'gray'}}/>
+                                        <div>
+                                            <h1>{item.name}</h1>
+                                            {/* <p>Location:<span>{item.location}</span></p> */}
+                                        </div>
+                                    </div>
+                                    <div className="display-service-sc-email-phone">
+                                        <div>
+                                            <p>email: <span>{item.email}</span></p>
+                                            <p>phone: <span>{item.phone}</span></p>
+                                        </div>
+                                        <p>address: {item.address}</p>
+                                    </div>
+                                </div>
+                            ))
+                        }
                     </div>
                 </div>
             </div>
