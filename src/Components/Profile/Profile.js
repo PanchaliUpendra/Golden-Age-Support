@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext,useState } from "react";
 import './Profile.css';
 import Profilepic from './Profilebg.png';
 import Profileimg from './Profile img.jpg';
@@ -9,6 +9,11 @@ function Profile(){
 
     const sharedvalue = useContext(MyContext);
     console.log('usrdtl: ',sharedvalue.profiledata);
+    const [ctktfile,setctktfile]=useState('');
+    function handleselectfile(e){
+        const selectedFile = e.target.files[0];
+        setctktfile(selectedFile);
+    }
 
     return(
         <>
@@ -19,16 +24,17 @@ function Profile(){
                 <img src={Profilepic} alt="profilepics"/>
             </div>
             <div className="profileimg">
-                <img src={Profileimg} alt="profilepics"/>
+                <img src={sharedvalue.profiledata.imgurl===''?Profileimg:sharedvalue.profiledata.imgurl} alt="profilepics"/>
             </div>
         </div>
         <div className="profile-content">
-            <div>
-                <input placeholder="edit profile" type='file' accept=".jpg, .jpeg, .png"/>
+
+            <div className="editing-the-profile-data">
+                <input type='file' value={ctktfile} onChange={(e)=>handleselectfile(e)}/>
             </div>
-            <div className="profile-content1">
-                <h1>...</h1>
-            </div>
+            {/* <div className="profile-content1">
+                
+            </div> */}
             <div className="profileName">
                 <h1>{sharedvalue.profiledata.name}</h1>
             </div>
@@ -47,6 +53,10 @@ function Profile(){
             </div> */}
         </div>
 
+    {
+        sharedvalue.role==='serviceprovider' && 
+    
+    <>
         <div className="feedbackHeading">
             <h1>Feedback</h1>
         </div>
@@ -127,6 +137,8 @@ function Profile(){
             
             
         </div>
+    </>
+    }
 
         <div className="Blogsheading">
             <h1>Blogs</h1>
@@ -176,6 +188,7 @@ function Profile(){
         </div>
     </section>
     }
+    
     <Footer/>
         </>
     );

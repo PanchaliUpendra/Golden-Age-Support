@@ -188,6 +188,17 @@
 .feedback .feedback-card .feedbackbody p{
     font-size: 0.8rem;
 }
+
+/* editing-the-profile-data */
+.editing-the-profile-data{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.editing-the-profile-data>h1{
+    cursor: pointer;
+}
 @media only screen and (max-width: 800px) {
     .feedback{
         justify-content: center;

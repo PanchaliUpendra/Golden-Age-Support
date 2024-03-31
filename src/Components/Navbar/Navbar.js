@@ -56,6 +56,8 @@ function Navbar(){
             <NavLink to='/careers'><li>Interact</li></NavLink>
             <NavLink to='/Admissions'><li>Find Service Provider</li></NavLink> */}
             {/* <NavLink to='/gallery'><li>gallery</li></NavLink> */}
+            {sharedvalue.isAuthed===true && <NavLink to='/createcommunity'><li>create community</li></NavLink>}
+            {sharedvalue.isAuthed===true && <NavLink to='/Viewcommunity'><li>View Community</li></NavLink>}
             {sharedvalue.isAuthed===true && <NavLink to='/profile'><li>Profile</li></NavLink>}
             
             <NavLink to='/contact'><li>contact</li></NavLink>

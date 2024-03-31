@@ -17,6 +17,10 @@ import Ourservices from './Components/Ourservices/Ourservices';
 import ShowAcceptedServices from './Components/Createservice/ShowAcceptedServices';
 import ShowCreateService from './Components/Createservice/ShowCreateService';
 
+import Createcommunity from './Components/Community/Createcommunity';
+import Viewcommunity from './Components/Community/Viewcommunity';
+import Eachcommunity from './Components/Community/Eachcommunity';
+
 function App() {
   const sharedvalue= useContext(MyContext);
 
@@ -37,6 +41,11 @@ function App() {
         <Route path='/ourservices' element={<Ourservices/>}/>
         {sharedvalue.isAuthed===true && <Route path='/showacceptedservices' element={<ShowAcceptedServices/>}/>}
         {sharedvalue.isAuthed===true && <Route path='/showcreateservices' element={<ShowCreateService/>}/>}
+
+        {sharedvalue.isAuthed===true && <Route path='/createcommunity' element={<Createcommunity/>}/>}
+        {sharedvalue.isAuthed===true && <Route path='/viewcommunity' element={<Viewcommunity/>}/>}
+        {sharedvalue.isAuthed===true && <Route path='/viewcommunity/:id' element={<Eachcommunity/>}/>}
+        
       </Routes>
     </BrowserRouter>
   );
