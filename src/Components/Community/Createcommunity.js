@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import './Createcommunity.css';
 import oldman1 from './Images/old man1.jpg';
 import oldman2 from './Images/old man2.jpg';
@@ -9,15 +9,47 @@ import Footer from "../Footer/Footer";
 
 
 function Createcommunity(){
+
+    const[createaddpost,setcreateaddpost]=useState({ //create add post ...
+        active:false,
+        header:'',
+        description:'',
+        topic:'',
+        comments:[],
+        likes:[],
+        time:'',
+        date:'',
+        profiledata:''
+    });
+
+    //adding the post
+    async function handleyourpost(){
+        try{
+            if(createaddpost.header!=='' && createaddpost.description!=='' &&
+            createaddpost.topic!==''
+            ){
+                console.log('here your data will added...');
+            }else{
+                alert('please fill all the fields!!');
+            }
+
+        }catch(e){
+            console.log('you got an error while adding the post..',e);
+        }
+    }
     return(
         <>
+            <div className={createaddpost.active===true?'careservices-addpost-active':''}>
             <div className="createcommunity-banner">
                 <div>
                     <h1>Community Wisdom: Where Ages Unite to Support and Inspire!</h1>
                     <p> Post questions, seek advice, and share concerns. Wise elders offer personalized responses, drawing from
                         life experiences. Diverse perspectives enrich discussions, fostering learning and growth. Enjoy a safe,
                         respectful environment with easy navigation. Join our vibrant community today!</p>
-                    <button>+ Add New Post</button>
+                    <button onClick={()=>setcreateaddpost(prev=>({
+                        ...prev,
+                        active:true
+                    }))}>+ Add New Post</button>
                 </div>
             </div>
             <div className="createcommunity-header">
@@ -73,10 +105,45 @@ function Createcommunity(){
                         <div className="profile-photo">
                             <img src={oldman4} alt="Profile"/>
                         </div>
-            </div>
-            </div>
+                    </div>
+                </div>
             </div>
             <Footer/>
+            </div>
+            <div className={createaddpost.active===true?`create-add-post-popup-active`:`create-add-post-popup-inactive`}>
+                <div className="create-community-page">
+                    <div className="create-community-page-div">
+                        <p onClick={()=>setcreateaddpost(prev=>({
+                            ...prev,
+                            active:false
+                        }))}>X</p>
+                    </div>
+                    <div className="create-community-page-form">
+                        <div>
+                            <label>subject</label>
+                            <input type="text"/>
+                        </div>
+                        <div>
+                            <label>select topic</label>
+                            <select>
+                                <option>--select--</option>
+                                <option>Events and Activities</option>
+                                <option>Health and Wellness</option>
+                                <option>Community News</option>
+                                <option>Volunteer Opportunities</option>
+                                <option>Lifestyle and Hobbies</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>description</label>
+                            <textarea placeholder="write your content here..."/>
+                        </div>
+                        <button onClick={()=>handleyourpost()}>add a post</button>
+                    </div>
+                    
+                </div>
+            </div>
+            
         </>
     );
 }
