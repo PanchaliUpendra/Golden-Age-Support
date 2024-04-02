@@ -62,6 +62,7 @@
     width: 100%;
     background-color: white;
     height: fit-content;
+    border-radius: 10px;
 }
 .right-container {
     width: 350px;
@@ -231,6 +232,122 @@
     background-color: rgb(0, 0, 160);
     cursor: pointer;
 
+}
+
+/* all-post-created-posts */
+.all-post-created-posts{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* community-dreated-page-leftcon */
+.community-dreated-page-leftcon>h1{
+    font-size: 1.5rem;
+    font-weight: 600;
+    padding: 10px;
+    padding-left: 20px;
+}
+
+/* createcommunity-each-post-head */
+.createcommunity-each-post-head{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.createcommunity-each-post-head>div{
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;
+}
+
+.createcommunity-each-post-head>div h1{
+    font-size: 1.35rem;
+    font-weight: 600;
+}
+
+.createcommunity-each-post-head>div p{
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: gray;
+}
+/* createcommunity-each-post-des */
+.createcommunity-each-post-des{
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin-top: 5px;
+}
+.createcommunity-each-post-des>h1{
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.createcommunity-each-post-des>p{
+    font-size: 0.9rem;
+    color: gray;
+}
+.createcommunity-each-post-buttons{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 5px;
+}
+.createcommunity-each-post-buttons>div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+}
+
+.createcommunity-each-post-buttons>div p{
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+.createcommunity-each-post-buttons>button{
+    padding: 5px 14px;
+    color: white;
+    font-weight: 600;
+    background-color: red;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+/* createcommunity-each-post-div */
+.createcommunity-each-post-div{
+    border-radius: 5px;
+    padding: 10px;
+    background-color: rgba(245, 245, 245, 0.555);
+    /* box-shadow: 0px -1px 8px 2px rgba(237,237,237,1); */
+    border: 1px solid gray;
+}
+.createcommunity-topic-para{
+    margin-top: 10px;
+}
+
+.createcommunity-topic-para>p{
+    color: white;
+    font-weight: 500;
+    font-size: 0.84rem;
+    background-color: rgb(147, 0, 184);
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    padding: 3px 10px;
+    width: fit-content;
+}
+
+@media screen and (max-width:1000px){
+    .left-container{
+        margin-right: 30px;
+    }
+    .right-container{
+        display: none;
+    }
 }
 
 @media all and (max-width:700px){

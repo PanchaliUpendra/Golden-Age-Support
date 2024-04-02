@@ -15,6 +15,8 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { v4 as uuidv4 } from 'uuid';
 import MyContext from "../../MyContext";
 
+import MessageIcon from '@mui/icons-material/Message';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 function Createcommunity(){
 
@@ -106,7 +108,47 @@ function Createcommunity(){
 
             <div className="created-community-posts">
                 <div className="left-container">
-                    <h1>Here will show all created posts</h1>
+                    <div className="community-dreated-page-leftcon">
+                        <h1>your community posts...</h1>
+                    </div>
+                    <div className="all-post-created-posts">
+                        {
+                            sharedvalue.allcommunitykeys
+                            .filter((item)=>sharedvalue.allcommunity[item].uid===sharedvalue.uid).length>0?
+                            sharedvalue.allcommunitykeys
+                            .filter((item)=>sharedvalue.allcommunity[item].uid===sharedvalue.uid)
+                            .map((item,idx)=>(
+                                <div key={idx} className="createcommunity-each-post-div">
+                                    <div className="createcommunity-each-post-head">
+                                        <AccountCircleIcon fontSize="large"/>
+                                        <div>
+                                            <h1>{sharedvalue.allcommunity[item].profiledata.name}</h1>
+                                            <p>date: {sharedvalue.allcommunity[item].date}</p>
+                                        </div>
+                                    </div>
+                                    <div className="createcommunity-topic-para">
+                                        <p>{sharedvalue.allcommunity[item].topic}</p>
+                                    </div>
+                                    <div className="createcommunity-each-post-des">
+                                        <h1>{sharedvalue.allcommunity[item].header}</h1>
+                                        <p>{sharedvalue.allcommunity[item].description.substring(0,240)}...</p>
+                                    </div>
+                                    <div className="createcommunity-each-post-buttons">
+                                        <div>
+                                        <MessageIcon fontSize="medium" sx={{color:'green',cursor:'pointer'}}/>
+                                        <p>{sharedvalue.allcommunity[item].comments.length} comments</p>
+                                        </div>
+                                        <button>Delete</button>
+                                    </div>
+                                    
+                                </div>
+                            )):
+                            <div>
+                                <h1>still now you didn't create any posts</h1>
+                            </div>
+                        }
+
+                    </div>
                 </div>
                 <div className="right-container">
                     <div className="message-box">

@@ -55,10 +55,10 @@ function MyProvider({children}){
                     try{
                         await onSnapshot(community,(doc)=>{
                             const tempcommunitydata = doc.data();
-                            // console.log(tempservicesdata);
+                            // console.log(tempcommunitydata);
                             setallcommunity(tempcommunitydata);
                             const tempcommunitykeys = Object.keys(tempcommunitydata);
-                            // console.log(tempservicekeys);
+                            // console.log(tempcommunitykeys);
                             setallcommunitykeys(tempcommunitykeys);
                         })
                     }catch(e){
