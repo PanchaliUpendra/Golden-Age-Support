@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import './Createcommunity.css';
 import oldman1 from './Images/old man1.jpg';
 import oldman2 from './Images/old man2.jpg';
@@ -7,8 +7,21 @@ import oldman4 from './Images/oldman4.jpg';
 import oldman5 from './Images/oldman5.jpg';
 import Footer from "../Footer/Footer";
 
+import { db } from "../../firebase";
+import { writeBatch } from "firebase/firestore";
+import { community } from "../../Docs/Docs";
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+import { v4 as uuidv4 } from 'uuid';
+import MyContext from "../../MyContext";
+
 
 function Createcommunity(){
+
+    const sharedvalue = useContext(MyContext);
+
+    const [open, setOpen] = useState(false);
+    const batch = writeBatch(db);
 
     const[createaddpost,setcreateaddpost]=useState({ //create add post ...
         active:false,
@@ -22,13 +35,47 @@ function Createcommunity(){
         profiledata:''
     });
 
+    
+
+
+
     //adding the post
     async function handleyourpost(){
+        setOpen(true);
+        const uuidg= uuidv4();
         try{
+            const formatDateString = (date) => date.toISOString().split('T')[0];
+            const currentDate = new Date();
+            const stringtodaydate = formatDateString(currentDate);
             if(createaddpost.header!=='' && createaddpost.description!=='' &&
             createaddpost.topic!==''
             ){
-                console.log('here your data will added...');
+                batch.update(community,{[uuidg]:{
+                    header:createaddpost.header,
+                    description:createaddpost.description,
+                    topic:createaddpost.topic,
+                    comments:[],
+                    likes:[],
+                    time:'',
+                    date:stringtodaydate,
+                    profiledata:sharedvalue.profiledata,
+                    uid:sharedvalue.uid
+                    }
+                });
+                await batch.commit();
+                alert('successfully added...');
+                setcreateaddpost(prev=>({
+                    ...prev,
+                    active:false,
+                    header:'',
+                    description:'',
+                    topic:'',
+                    comments:[],
+                    likes:[],
+                    time:'',
+                    date:'',
+                    profiledata:''
+                }));
             }else{
                 alert('please fill all the fields!!');
             }
@@ -36,6 +83,7 @@ function Createcommunity(){
         }catch(e){
             console.log('you got an error while adding the post..',e);
         }
+        setOpen(false);
     }
     return(
         <>
@@ -121,28 +169,43 @@ function Createcommunity(){
                     <div className="create-community-page-form">
                         <div>
                             <label>subject</label>
-                            <input type="text"/>
+                            <input type="text" value={createaddpost.header} onChange={(e)=>setcreateaddpost(prev=>({
+                                ...prev,
+                                header:e.target.value
+                            }))}/>
                         </div>
                         <div>
                             <label>select topic</label>
-                            <select>
-                                <option>--select--</option>
-                                <option>Events and Activities</option>
-                                <option>Health and Wellness</option>
-                                <option>Community News</option>
-                                <option>Volunteer Opportunities</option>
-                                <option>Lifestyle and Hobbies</option>
+                            <select value={createaddpost.topic} onChange={(e)=>setcreateaddpost(prev=>({
+                                ...prev,
+                                topic:e.target.value
+                            }))}>
+                                <option value=''>--select--</option>
+                                <option value='Events and Activities'>Events and Activities</option>
+                                <option value='Health and Wellness'>Health and Wellness</option>
+                                <option value='Community News'>Community News</option>
+                                <option value='Volunteer Opportunities'>Volunteer Opportunities</option>
+                                <option value='Lifestyle and Hobbies'>Lifestyle and Hobbies</option>
                             </select>
                         </div>
                         <div>
                             <label>description</label>
-                            <textarea placeholder="write your content here..."/>
+                            <textarea placeholder="write your content here..." value={createaddpost.description} onChange={(e)=>setcreateaddpost(prev=>({
+                                ...prev,
+                                description:e.target.value
+                            }))}/>
                         </div>
                         <button onClick={()=>handleyourpost()}>add a post</button>
                     </div>
                     
                 </div>
             </div>
+            <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={open}
+            >
+                <CircularProgress color="inherit" />
+            </Backdrop>
             
         </>
     );

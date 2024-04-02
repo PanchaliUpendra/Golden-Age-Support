@@ -3,7 +3,7 @@ import MyContext from "./MyContext";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, onSnapshot } from "firebase/firestore";
 import { auth, db } from "./firebase";
-import { createService, careservices } from "./Docs/Docs";
+import { createService, careservices,community } from "./Docs/Docs";
 
 function MyProvider({children}){
     const[profiledata,setprofiledata]=useState('');
@@ -13,6 +13,9 @@ function MyProvider({children}){
 
     const [allcareservices,setallcareservices] = useState({});
     const [ allcareserkeys,setallcareserkeys] = useState([]);
+
+    const [allcommunity,setallcommunity] = useState({});
+    const [allcommunitykeys,setallcommunitykeys] = useState([]);
 
     const [user,setuser] = useState({
         isAuthed:false,
@@ -29,7 +32,10 @@ function MyProvider({children}){
         allservices:allservices,
         allserviceskeys:allserviceskeys,
         allcareservices:allcareservices,
-        allcareserkeys:allcareserkeys
+        allcareserkeys:allcareserkeys,
+
+        allcommunity:allcommunity,
+        allcommunitykeys:allcommunitykeys
     }
     useEffect(()=>{
         const unSubscribe = onAuthStateChanged(auth, (userd) => {
@@ -43,6 +49,23 @@ function MyProvider({children}){
                   uid:uid,
                   userdtl:userd
                 }))
+
+                //fetching the community
+                async function handlefetchcommunity(){
+                    try{
+                        await onSnapshot(community,(doc)=>{
+                            const tempcommunitydata = doc.data();
+                            // console.log(tempservicesdata);
+                            setallcommunity(tempcommunitydata);
+                            const tempcommunitykeys = Object.keys(tempcommunitydata);
+                            // console.log(tempservicekeys);
+                            setallcommunitykeys(tempcommunitykeys);
+                        })
+                    }catch(e){
+                        console.log('you got an error while fetching the community..',e);
+                    }
+                }
+                handlefetchcommunity();
 
                 //fetching the care services
                 async function handlefetchcareservices(){
