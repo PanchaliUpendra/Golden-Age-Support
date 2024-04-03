@@ -14,6 +14,7 @@ import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 import { v4 as uuidv4 } from 'uuid';
 import MyContext from "../../MyContext";
+import { updateDoc, deleteField } from "firebase/firestore";
 
 import MessageIcon from '@mui/icons-material/Message';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
@@ -38,6 +39,20 @@ function Createcommunity(){
         date:'',
         profiledata:''
     });
+
+    // deleting the post
+    async function handledeleteservice(id){
+        setOpen(true);
+        try{
+            await updateDoc(community,{
+                [id]:deleteField()
+            });
+            await batch.commit();
+        }catch(e){
+            console.log('you got an error while deleting the quotation',e);
+        }
+         setOpen(false);
+    }
 
     
 
@@ -140,7 +155,7 @@ function Createcommunity(){
                                         <MessageIcon fontSize="medium" sx={{color:'green',cursor:'pointer'}} />
                                         <p>{sharedvalue.allcommunity[item].comments.length} comments</p>
                                         </div>
-                                        <button>Delete</button>
+                                        <button onClick={()=>handledeleteservice(item)}>Delete</button>
                                     </div>
                                     
                                 </div>

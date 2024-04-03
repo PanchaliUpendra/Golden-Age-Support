@@ -99,3 +99,29 @@
     font-weight: 500;
     border-radius: 5px;
 }
+
+/* eachcomm-comments-header */
+.eachcomm-comments-header{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.eachcomm-comments-header>h1{
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* eachcomm-all-comments-dis */
+.eachcomm-all-comments-dis{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.eachcomm-all-comments-dis>div{
+    width: 100%;
+    min-height: fit-content;
+    padding:10px;
+    background-color: white;
+    border-radius: 5px;
+
+}

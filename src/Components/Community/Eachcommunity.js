@@ -10,6 +10,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { db } from "../../firebase";
 import { writeBatch } from "firebase/firestore";
 import { community } from "../../Docs/Docs";
+import ForumIcon from '@mui/icons-material/Forum';
 
 function Eachcommunity(){
     const navigate = useNavigate();
@@ -80,6 +81,31 @@ function Eachcommunity(){
                         <label>Add Your Comment's</label>
                         <textarea value={addcomment} placeholder="write your comments here...." onChange={(e)=>setaddcomment(e.target.value)}/>
                         <button onClick={()=>handlingaddcomment()}>post</button>
+                    </div>
+                    <div className="eachcomm-comments-header">
+                        <h1>Comments</h1>
+                    </div>
+                    <div className="eachcomm-all-comments-dis">
+                        {
+                            sharedvalue.allcommunity[id].comments.map((item,idx)=>(
+                                <div>
+                                    <div className="createcommunity-each-post-head">
+                                        <ForumIcon fontSize="medium"/>
+                                        <div>
+                                            <h1>{item.name}</h1>
+                                            <p>date: {item.date}</p>
+                                        </div>
+                                    </div>
+                                    {/* <div className="createcommunity-topic-para">
+                                        <p>{sharedvalue.allcommunity[item].topic}</p>
+                                    </div> */}
+                                    <div className="createcommunity-each-post-des">
+                                        {/* <h1>{sharedvalue.allcommunity[item].header}</h1> */}
+                                        <p>{item.comment}</p>
+                                    </div>
+                                </div>
+                            ))
+                        }
                     </div>
                 </div>
                 
