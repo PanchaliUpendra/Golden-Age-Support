@@ -54,8 +54,8 @@ function Viewcommunity(){
                                         <p>{sharedvalue.allcommunity[item].description.substring(0,240)}...</p>
                                     </div>
                                     <div className="createcommunity-each-post-buttons">
-                                        <div>
-                                        <MessageIcon fontSize="medium" sx={{color:'green',cursor:'pointer'}}/>
+                                        <div onClick={()=>navigate(`/viewcommunity/${item}`)}>
+                                        <MessageIcon fontSize="medium" sx={{color:'green',cursor:'pointer'}} />
                                         <p>{sharedvalue.allcommunity[item].comments.length} comments</p>
                                         </div>
                                         <div className="viewcommunity-view-btn">

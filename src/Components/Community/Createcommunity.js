@@ -17,9 +17,11 @@ import MyContext from "../../MyContext";
 
 import MessageIcon from '@mui/icons-material/Message';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { useNavigate } from "react-router-dom";
 
 function Createcommunity(){
 
+    const navigate = useNavigate();
     const sharedvalue = useContext(MyContext);
 
     const [open, setOpen] = useState(false);
@@ -119,23 +121,23 @@ function Createcommunity(){
                             .filter((item)=>sharedvalue.allcommunity[item].uid===sharedvalue.uid)
                             .map((item,idx)=>(
                                 <div key={idx} className="createcommunity-each-post-div">
-                                    <div className="createcommunity-each-post-head">
+                                    <div className="createcommunity-each-post-head" onClick={()=>navigate(`/viewcommunity/${item}`)}>
                                         <AccountCircleIcon fontSize="large"/>
                                         <div>
                                             <h1>{sharedvalue.allcommunity[item].profiledata.name}</h1>
                                             <p>date: {sharedvalue.allcommunity[item].date}</p>
                                         </div>
                                     </div>
-                                    <div className="createcommunity-topic-para">
+                                    <div className="createcommunity-topic-para" onClick={()=>navigate(`/viewcommunity/${item}`)}>
                                         <p>{sharedvalue.allcommunity[item].topic}</p>
                                     </div>
-                                    <div className="createcommunity-each-post-des">
+                                    <div className="createcommunity-each-post-des" onClick={()=>navigate(`/viewcommunity/${item}`)}>
                                         <h1>{sharedvalue.allcommunity[item].header}</h1>
                                         <p>{sharedvalue.allcommunity[item].description.substring(0,240)}...</p>
                                     </div>
                                     <div className="createcommunity-each-post-buttons">
-                                        <div>
-                                        <MessageIcon fontSize="medium" sx={{color:'green',cursor:'pointer'}}/>
+                                        <div onClick={()=>navigate(`/viewcommunity/${item}`)}>
+                                        <MessageIcon fontSize="medium" sx={{color:'green',cursor:'pointer'}} />
                                         <p>{sharedvalue.allcommunity[item].comments.length} comments</p>
                                         </div>
                                         <button>Delete</button>
