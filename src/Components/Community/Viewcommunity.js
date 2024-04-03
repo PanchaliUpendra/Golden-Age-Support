@@ -4,7 +4,9 @@ import Footer from "../Footer/Footer";
 import MyContext from "../../MyContext";
 import MessageIcon from '@mui/icons-material/Message';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { useNavigate } from "react-router-dom";
 function Viewcommunity(){
+    const navigate = useNavigate();
     const sharedvalue = useContext(MyContext);
     const [filtervalue,setfiltervalue] = useState('');
     return(
@@ -57,7 +59,7 @@ function Viewcommunity(){
                                         <p>{sharedvalue.allcommunity[item].comments.length} comments</p>
                                         </div>
                                         <div className="viewcommunity-view-btn">
-                                            <button>View</button>
+                                            <button onClick={()=>navigate(`/viewcommunity/${item}`)}>View</button>
                                         </div>
                                     </div>
                                     

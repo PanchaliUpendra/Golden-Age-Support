@@ -1,0 +1,50 @@
+.eachcommunity-con{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.eachcommunity-inner-con{
+    width: 1100px;
+    min-height: 150px;
+    background-color: #efefef;
+    padding: 30px;
+}
+
+.eachcommunity-inner-view-topic-head{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.eachcommunity-inner-view-name-dtl>div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+}
+
+.eachcommunity-inner-view-name-dtl>p{
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: capitalize;
+    color: white;
+    background-color: rgb(252, 0, 197);
+    padding: 5px 14px;
+    min-width: 200px;
+    margin-top: 5px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.eachcommunity-inner-view-name-dtl>div h1{
+    font-size: 1.1rem;
+    font-weight: 600;
+
+}
+
+.eachcommunity-inner-view-name-dtl>div p{
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: gray;
+}
