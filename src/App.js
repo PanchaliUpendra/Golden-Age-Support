@@ -32,7 +32,7 @@ function App() {
         {sharedvalue.isAuthed===false && <Route path='/login' element={<Login/>}/>}
         {sharedvalue.isAuthed===false && <Route path='/register' element={<Register/>}/>}
         {sharedvalue.isAuthed===true && <Route path='/profile' element={<Profile/>}/>}
-        <Route path='/services' element={<Services/>}/>
+        {sharedvalue.isAuthed===true && sharedvalue.role==='serviceprovider' && <Route path='/services' element={<Services/>}/>}
         <Route path='/createservice' element={<Createservice/>}/>
         <Route path='/about' element={<About/>}/>
         <Route path='/contact' element={<Contactus/>}/>

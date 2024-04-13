@@ -1,5 +1,6 @@
 import React from "react";
 import './Footer.css';
+import { NavLink } from "react-router-dom";
 
 function Footer(){
     return(
@@ -30,23 +31,23 @@ function Footer(){
     </div>
     <div className="content-footer">
         <div className="footer-2-link">
-            <i className="fa-solid fa-greater-than" ></i><>Home</>
+            <i className="fa-solid fa-greater-than" ></i><NavLink to='/'>Home</NavLink>
         </div>
         <div className="footer-2-link">
-            <i className="fa-solid fa-greater-than" ></i><>About Us</>
+            <i className="fa-solid fa-greater-than" ></i><NavLink to='/about'>About Us</NavLink>
         </div>
         <div className="footer-2-link">
-            <i className="fa-solid fa-greater-than" ></i><>Service</>
+            <i className="fa-solid fa-greater-than" ></i><NavLink to='/ourservices'>Our Services</NavLink>
         </div>
         <div className="footer-2-link">
-            <i className="fa-solid fa-greater-than" ></i><>Blogs</>
+            <i className="fa-solid fa-greater-than" ></i><NavLink to='/Viewcommunity'>View Community</NavLink>
         </div>
         <div className="footer-2-link">
-            <i className="fa-solid fa-greater-than" ></i><>Resources</>
+            <i className="fa-solid fa-greater-than" ></i><NavLink to='/profile'>Profile</NavLink>
         </div>
-        <div className="footer-2-link">
-            <i className="fa-solid fa-greater-than" ></i><>Contact Us</>
-        </div>
+        {/* <div className="footer-2-link">
+            <i className="fa-solid fa-greater-than" ></i><NavLink to='/contact'>Contact Us</NavLink>
+        </div> */}
         
     </div>
 
@@ -58,13 +59,13 @@ function Footer(){
     </div>
     <div className="content-footer">
         <div className="footer-2-link">
-            <i className="fa-solid fa-greater-than" style={{color: "#ffffff"}}></i><>Our Mission</>
+            <i className="fa-solid fa-greater-than" style={{color: "#ffffff"}}></i><NavLink to='/about'>Our Mission</NavLink>
         </div>
         <div className="footer-2-link">
-            <i className="fa-solid fa-greater-than" ></i><>Our Vision</>
+            <i className="fa-solid fa-greater-than" ></i><NavLink to='/about'>Our Vision</NavLink>
         </div>
         <div className="footer-2-link">
-            <i className="fa-solid fa-greater-than" ></i><>Our Values</>
+            <i className="fa-solid fa-greater-than" ></i><NavLink to='/about'>Our Values</NavLink>
         </div>
     </div>
 
@@ -76,14 +77,14 @@ function Footer(){
     </div>
     <div className="content-footer">
         <div className="footer-2-link">
-            <i className="fa-solid fa-greater-than" ></i><>Contact</>
+        <i className="fa-solid fa-greater-than" ></i><NavLink to='/contact'>Contact Us</NavLink>
         </div>
-        <div className="footer-2-link">
+        {/* <div className="footer-2-link">
             <i className="fa-solid fa-greater-than" ></i><>Career</>
         </div>
         <div className="footer-2-link">
             <i className="fa-solid fa-greater-than" ></i><>SiteMap</>
-        </div>
+        </div> */}
     </div>
 
 </div>

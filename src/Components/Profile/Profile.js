@@ -1,18 +1,60 @@
-import React, { useContext,useState } from "react";
+import React, { useContext,useState} from "react";
 import './Profile.css';
 import Profilepic from './Profilebg.png';
 import Profileimg from './Profile img.jpg';
 import Footer from '../Footer/Footer';
 import MyContext from '../../MyContext';
+import { getDownloadURL,ref,uploadBytes } from 'firebase/storage';
+import { storage } from "../../firebase";
+import {writeBatch} from "firebase/firestore";
+import { db } from "../../firebase";
+import { doc } from "firebase/firestore";
 
 function Profile(){
-
+    const batch = writeBatch(db);
     const sharedvalue = useContext(MyContext);
-    console.log('usrdtl: ',sharedvalue.profiledata);
+    // console.log('usrdtl: ',sharedvalue.profiledata);
     const [ctktfile,setctktfile]=useState('');
+     //downloading the file url from datastorage
+     const downloadfileurl = async() =>{
+        try{
+            return new Promise((resolve,reject)=>{
+                const storageref = ref(storage,ctktfile.name);
+                const downloadurl = getDownloadURL(storageref);
+                console.log('downloadurl',downloadurl);
+                resolve(downloadurl);
+            })
+                
+        }catch(e){
+            console.log('you getting an error while downloading url ',e);
+            alert('you get error while adding image',e);
+        }
+    }
     function handleselectfile(e){
         const selectedFile = e.target.files[0];
         setctktfile(selectedFile);
+    }
+
+    async function handleuploadimage(){
+        try{
+            var fileurl ='';
+            const storageref = ref(storage,ctktfile.name);
+            const response = await uploadBytes(storageref,ctktfile);
+            if(response){
+                fileurl= await downloadfileurl();
+            }else{
+                console.log('response error');
+            }
+            await batch.update(doc(db,"users",sharedvalue.uid),{
+                ...sharedvalue.profiledata,
+                imgurl:fileurl,
+            });
+            await batch.commit();
+            
+        }catch(e){
+            console.error('you got an error while uploading gthe file, ', e);
+            alert('you got an  error');
+        }
     }
 
     return(
@@ -30,7 +72,8 @@ function Profile(){
         <div className="profile-content">
 
             <div className="editing-the-profile-data">
-                <input type='file' value={ctktfile} onChange={(e)=>handleselectfile(e)}/>
+                <input type='file'   onChange={(e)=>handleselectfile(e)}/>
+                <p onClick={()=>handleuploadimage()}>upload</p>
             </div>
             {/* <div className="profile-content1">
                 

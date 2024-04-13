@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import './Homepage.css';
 import Marquee from "react-fast-marquee";
 import KnowMore from '../../Assets/knowmoreimg.jpeg';
@@ -14,6 +14,9 @@ import Caregiverthree from "./Care givers.jpg";
 
 function Homepage(){
     const navigate = useNavigate();
+    useEffect(()=>{
+        window.scrollTo({top:0,behavior:'smooth'});
+    },[]);
     return(
         <>
 

@@ -3,6 +3,7 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+import {getStorage} from 'firebase/storage';
 const firebaseConfig = {
   apiKey: "AIzaSyBdyRVDYXtiZuD5PgOFnS3c2GGbcKbIn5E",
   authDomain: "goldenage-15a00.firebaseapp.com",
@@ -17,3 +18,4 @@ export const app = initializeApp(firebaseConfig);
 export const analytics = getAnalytics(app);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
+export const storage = getStorage(app);
