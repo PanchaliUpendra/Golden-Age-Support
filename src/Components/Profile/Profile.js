@@ -9,12 +9,15 @@ import { storage } from "../../firebase";
 import {writeBatch} from "firebase/firestore";
 import { db } from "../../firebase";
 import { doc } from "firebase/firestore";
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 function Profile(){
     const batch = writeBatch(db);
     const sharedvalue = useContext(MyContext);
     // console.log('usrdtl: ',sharedvalue.profiledata);
     const [ctktfile,setctktfile]=useState('');
+    const [showloading,setshowloading] = useState(false);
      //downloading the file url from datastorage
      const downloadfileurl = async() =>{
         try{
@@ -36,6 +39,7 @@ function Profile(){
     }
 
     async function handleuploadimage(){
+        setshowloading(true);
         try{
             var fileurl ='';
             const storageref = ref(storage,ctktfile.name);
@@ -55,6 +59,7 @@ function Profile(){
             console.error('you got an error while uploading gthe file, ', e);
             alert('you got an  error');
         }
+        setshowloading(false);
     }
 
     return(
@@ -85,8 +90,32 @@ function Profile(){
                 <h1>{sharedvalue.profiledata.role}</h1>
             </div>
             <div className="profileServiceName">
-                <p><span>{sharedvalue.profiledata.stars}</span>  stars</p>
-                <p><span>{sharedvalue.profiledata.reviews}</span>  reviews</p>
+                <p><span>{sharedvalue.allcommunitykeys
+                            .filter((item)=>sharedvalue.allcommunity[item].uid===sharedvalue.uid).length}</span>  Community Posts</p>
+                {
+                    sharedvalue.profiledata.role==='caretaker' && <p><span>{sharedvalue.allcareserkeys
+                        .filter(item=>(sharedvalue.allcareservices[item].createduid===sharedvalue.uid))
+                        .length}</span>  care services</p>
+                }
+
+                {
+                    sharedvalue.profiledata.role==='serviceprovider' &&
+                    <p>
+                        <span>{sharedvalue.allserviceskeys.filter(item=>(sharedvalue.allservices[item].accepted===true && sharedvalue.allservices[item].acceptedby.email===sharedvalue.profiledata.email))
+                            .filter(item=>sharedvalue.allservices[item].completed===true)
+                            .length}</span> Services Provided
+                    </p>
+                }
+
+                {
+                    sharedvalue.profiledata.role==='seniorcitizen' &&
+                    <p>
+                        <span>{sharedvalue.allserviceskeys
+                            .filter(item=>sharedvalue.allservices[item].createdby===sharedvalue.uid)
+                            .filter(item=>sharedvalue.allservices[item].completed===true)
+                            .length}</span> Services Taken
+                    </p>
+                }
             </div>
             {/* <div className="profileServiceLocation">
                 <div>
@@ -231,6 +260,12 @@ function Profile(){
         </div>
     </section>
     }
+    <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={showloading}
+    >
+        <CircularProgress color="inherit" />
+    </Backdrop>
     
     <Footer/>
         </>

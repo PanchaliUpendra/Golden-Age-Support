@@ -94,29 +94,26 @@ function Homepage(){
                 <div>
                     <Marquee>
                         <div className="careservice-divs">
-                            <h1>Personal Care</h1>
-                            <p>Caretakers assist with personal hygiene tasks such as bathing, dressing, grooming, and toileting. 
-                                They ensure that seniors maintain good hygiene practices and stay comfortable.</p>
+                            <h1>Testimonial from Sarah D.</h1>
+                            <p>"GoldenAge Support has truly enriched my life with its Lifestyle and Hobbies section. I've rediscovered my passion for
+                                 gardening and have connected with like-minded seniors who share my love for plants and outdoor activities."</p>
                         </div>
                         <div className="careservice-divs">
-                            <h1>Medication Management</h1>
-                            <p>Caretakers help seniors with medication reminders, ensuring they take their prescribed medicines on time 
-                                and in the correct dosage as per the healthcare provider's instructions.</p>
+                            <h1>Testimonial from James W.</h1>
+                            <p>As a retired traveler, I find the Lifestyle and Hobbies section on GoldenAge Support incredibly inspiring. It's a treasure trove of travel tips, destination recommendations,
+                                 and stories that fuel my wanderlust and keep me exploring new horizons.</p>
                         </div>
                         <div className="careservice-divs">
-                            <h1>Mobility Support</h1>
-                            <p>For older adults with mobility issues, caretakers provide support with walking, 
-                                transferring from one place to another (e.g., from bed to chair), and using mobility aids like walkers or wheelchairs.</p>
+                            <h1>Testimonial from Margaret S.</h1>
+                            <p>The Lifestyle and Hobbies section on GoldenAge Support has opened up a world of creativity for me. From art classes to DIY projects, I've found joy in pursuing new hobbies and expressing myself through various artistic endeavors.</p>
                         </div>
                         <div className="careservice-divs">
-                            <h1>Meal Preparation</h1>
-                            <p>Caretakers prepare nutritious meals based on dietary requirements and preferences. 
-                                They may also assist with feeding if necessary, ensuring seniors receive adequate nutrition.</p>
+                            <h1>Testimonial from Robert M.</h1>
+                            <p>I never knew how much I'd enjoy cooking until I stumbled upon the Lifestyle and Hobbies section on GoldenAge Support. The recipes, cooking tips, and culinary adventures shared here have turned me into a gourmet chef in my own kitchen!</p>
                         </div>
                         <div className="careservice-divs">
-                            <h1>Household Assistance</h1>
-                            <p>Caretakers help with light household chores such as cleaning, laundry, and organizing. They create a safe and 
-                                tidy environment for seniors to live comfortably.</p>
+                            <h1>Testimonial from Alice H.</h1>
+                            <p>The Lifestyle and Hobbies section on GoldenAge Support has reignited my love for music. From virtual concerts to music appreciation classes, I've found a community of music lovers who appreciate the timeless melodies that bring us together.</p>
                         </div>
                         <div className="careservice-divs">
                             <h1>Companionship</h1>

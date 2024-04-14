@@ -328,6 +328,18 @@
     background-color: #4169e1;
     color: white;
 }
+
+/* editing-the-profile-data */
+.editing-the-profile-data>p{
+    padding: 10px 20px;
+    border: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: white;
+    background-color: purple;
+    border-radius: 4px;
+    cursor: pointer;
+}
 @media only screen and (max-width: 800px){
     .blogsSection{
         justify-content: center;

@@ -32,9 +32,11 @@ function About(){
         <div className="about-us-container">,
             <div className="about-us-content">
                 <h2>Welcome to our page</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident magni molestias beatae maxime
-                    excepturi nam aliquid quae dolor. Molestiae ab omnis inventore iure vel eius. Officiis enim, numquam
-                    ducimus eum expedita libero ab modi.</p>
+                <p>Welcome to GoldenAge Support, where we are dedicated to enhancing
+                     the lives of seniors and providing them with
+                      the support they need to thrive in their golden years.
+                       Our mission is to create a caring and compassionate community
+                 that empowers seniors to live life to the fullest.</p>
                
             </div>
             <div className="about-us-image">
